@@ -4,6 +4,7 @@ import { auth } from '../../firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import { FirebaseError } from 'firebase/app';
 import { Switcher, Error, Input, Form, Title, Wrapper } from '../components/SC/SC.Auth';
+import GithubLogin from '../components/GithubLogin';
 
 // const errors = {
 //   'auth/email-already-in-use': '이미 존재하는 이메일입니다.',
@@ -78,6 +79,7 @@ const Signup = () => {
       <Switcher>
         이미 계정이 있으신가요? <Link to='/login'>로그인 &rarr;</Link>
       </Switcher>
+      <GithubLogin />
     </Wrapper>
   );
 };

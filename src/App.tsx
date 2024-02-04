@@ -29,7 +29,11 @@ function App() {
     {
       path: '/',
       // 만약 해당 path 하위 목록을 전부 ProtectedRoute 적용하고 싶다면, 하위 요소가 아닌 Layout을 감싸면 된다.
-      element: <Layout />,
+      element: (
+        <ProtectedRoute>
+          <Layout />
+        </ProtectedRoute>
+      ),
       children: [
         {
           path: '',
@@ -38,9 +42,9 @@ function App() {
         {
           path: 'profile',
           element: (
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            <Profile />
+            // </ProtectedRoute>
           ),
         },
       ],
