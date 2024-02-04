@@ -29,8 +29,8 @@ export default GithubLogin;
 
 const Button = styled.span`
   width: 100%;
-  background-color: white;
-  color: black;
+  background-color: ${({ theme }) => theme.color.btn2};
+  color: ${({ theme }) => theme.color.text2};
   font-weight: 600;
   padding: 10px 20px;
   border-radius: 12px;

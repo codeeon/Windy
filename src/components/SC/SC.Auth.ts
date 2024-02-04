@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
 
 export const Title = styled.h1`
   font-size: 42px;
+  color: ${({ theme }) => theme.color.base};
 `;
 
 export const Form = styled.form`
@@ -30,8 +31,8 @@ export const Input = styled.input`
   font-size: 16px;
   &[type='submit'] {
     cursor: pointer;
-    background-color: #3adf00;
-    color: #424242;
+    background-color: ${({ theme }) => theme.color.btn};
+    color: ${({ theme }) => theme.color.text};
     font-weight: 600;
     &:hover {
       opacity: 0.8;
@@ -41,13 +42,13 @@ export const Input = styled.input`
 
 export const Error = styled.span`
   font-weight: 600;
-  color: tomato;
+  color: ${({ theme }) => theme.color.warn};
 `;
 
 export const Switcher = styled.span`
   margin-top: 20px;
-  color: #727272;
+  color: ${({ theme }) => theme.color.sub2};
   a {
-    color: forestgreen;
+    color: ${({ theme }) => theme.color.link};
   }
 `;

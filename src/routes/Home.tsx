@@ -1,16 +1,15 @@
 import React from 'react';
-import { auth } from '../../firebase';
+import PostForm from '../components/PostForm';
+import { styled } from 'styled-components';
 
 const Home = () => {
-  const logout = () => {
-    auth.signOut();
-  };
-
   return (
-    <div>
-      <button onClick={logout}>Log out</button>
-    </div>
+    <Wrapper>
+      <PostForm />
+    </Wrapper>
   );
 };
 
 export default Home;
+
+const Wrapper = styled.div``;

@@ -10,8 +10,8 @@ const GlobalStyles = createGlobalStyle`
     transition : background-color 200ms ease-in-out;
   }
   body {
-    background-color: #89E3D0;
-    color: white;
+    background-color: ${({ theme }) => theme.color.bg};
+    color: ${({ theme }) => theme.color.text2};
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 `;

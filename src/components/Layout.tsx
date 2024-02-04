@@ -11,6 +11,7 @@ const Layout = () => {
 
   const onLogOut = async () => {
     const ok = confirm('정말 로그아웃 하시겠습니까?');
+
     if (ok) {
       await auth.signOut();
       navigate('/login');
@@ -63,18 +64,22 @@ const MenuItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid white;
+  border: 2px solid ${({ theme }) => theme.color.border};
   height: 50px;
   width: 50px;
   border-radius: 50%;
   svg {
     width: 30px;
-    fill: white;
+    fill: ${({ theme }) => theme.color.base};
   }
   &.log-out {
-    border-color: tomato;
+    border-color: ${({ theme }) => theme.color.warn};
     svg {
-      fill: tomato;
+      fill: ${({ theme }) => theme.color.warn};
     }
+  }
+  &:hover,
+  &:active {
+    border: 2px solid ${({ theme }) => theme.color.focus};
   }
 `;

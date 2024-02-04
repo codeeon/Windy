@@ -9,8 +9,9 @@ import Profile from './routes/Profile';
 import Login from './routes/Login';
 import Signup from './routes/Signup';
 import { auth } from '../firebase';
-import { styled } from 'styled-components';
+import { ThemeProvider, styled } from 'styled-components';
 import ProtectedRoute from './components/ProtectedRoute';
+import { LightTheme } from './styles/Theme';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -61,8 +62,10 @@ function App() {
 
   return (
     <Wrapper>
-      <GlobalStyles />
-      {isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}
+      <ThemeProvider theme={LightTheme}>
+        <GlobalStyles />
+        {isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}
+      </ThemeProvider>
     </Wrapper>
   );
 }
