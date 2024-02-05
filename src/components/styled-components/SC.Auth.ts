@@ -11,7 +11,6 @@ export const Wrapper = styled.div`
 
 export const Title = styled.h1`
   font-size: 42px;
-  color: ${({ theme }) => theme.color.base};
 `;
 
 export const Form = styled.form`

@@ -3,7 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FirebaseError } from 'firebase/app';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
-import { Switcher, Error, Input, Form, Title, Wrapper } from '../components/SC/SC.Auth';
+import {
+  Switcher,
+  Error,
+  Input,
+  Form,
+  Title,
+  Wrapper,
+} from '../components/styled-components/SC.Auth';
 import GithubLogin from '../components/GithubLogin';
 
 // const errors = {

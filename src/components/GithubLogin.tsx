@@ -10,7 +10,6 @@ const GithubLogin = () => {
   const onClick = async () => {
     try {
       const provider = new GithubAuthProvider();
-      //   await signInWithPopup(auth, provider);
       await signInWithRedirect(auth, provider);
       navigate('/');
     } catch (error) {

@@ -3,7 +3,14 @@ import React, { useState } from 'react';
 import { auth } from '../../firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import { FirebaseError } from 'firebase/app';
-import { Switcher, Error, Input, Form, Title, Wrapper } from '../components/SC/SC.Auth';
+import {
+  Switcher,
+  Error,
+  Input,
+  Form,
+  Title,
+  Wrapper,
+} from '../components/styled-components/SC.Auth';
 import GithubLogin from '../components/GithubLogin';
 
 // const errors = {
@@ -40,7 +47,8 @@ const Signup = () => {
     e.preventDefault();
     setError('');
 
-    if (isLoading || name === '' || email === '' || password === '' || passwordConfirm === '') return;
+    if (isLoading || name === '' || email === '' || password === '' || passwordConfirm === '')
+      return;
     try {
       setIsLoading(true);
 
@@ -72,7 +80,12 @@ const Signup = () => {
         <Input onChange={onChange} name='name' placeholder='이름' type='text' />
         <Input onChange={onChange} name='email' placeholder='이메일' type='text' />
         <Input onChange={onChange} name='password' placeholder='비밀번호' type='password' />
-        <Input onChange={onChange} name='passwordConfirm' placeholder='비밀번호 확인' type='password' />
+        <Input
+          onChange={onChange}
+          name='passwordConfirm'
+          placeholder='비밀번호 확인'
+          type='password'
+        />
         <Input type='submit' value={isLoading ? '로딩 중...' : '가입하기'} />
       </Form>
       {error !== '' && <Error>{error}</Error>}

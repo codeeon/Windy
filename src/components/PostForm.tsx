@@ -1,5 +1,7 @@
+import { addDoc, collection } from 'firebase/firestore';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { auth, db } from '../../firebase';
 
 const PostForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,10 +17,28 @@ const PostForm = () => {
       setFile(files[0]);
     }
   };
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const user = auth.currentUser;
+    if (!user || isLoading || post === '' || post.length < 100) return;
+    try {
+      setIsLoading(true);
+      await addDoc(collection(db, 'posts'), {
+        post,
+        createdAt: Date.now(),
+        username: user.displayName || '익명',
+        userId: user.uid,
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <Form>
-      <TextArea rows={5} onChange={onChangePost} value={post} placeholder='글을 입력해주세요.' />
+    <Form onSubmit={onSubmit}>
+      <TextArea rows={6} onChange={onChangePost} value={post} placeholder='글을 입력해주세요.' />
       <AttachFileInput onChange={onFileChange} type='file' id='file' accept='image/*' />
       <AttachFileButton htmlFor='file'>{file ? '✔ 업로드 완료' : '이미지 업로드'}</AttachFileButton>
       {/* label의 htmlFor와 id가 일치하면, 해당 label이 id를 가진 요소와 같은 역할을 한다. */}
@@ -45,10 +65,12 @@ const TextArea = styled.textarea`
   background-color: ${({ theme }) => theme.color.bg};
   width: 100%;
   resize: none;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   &::placeholder {
     font-size: 16px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+      Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   &:focus {
     outline: none;
