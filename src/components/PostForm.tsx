@@ -1,7 +1,8 @@
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, updateDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { auth, db } from '../../firebase';
+import { auth, db, storage } from '../../firebase';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 const PostForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,21 +15,36 @@ const PostForm = () => {
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (files && files.length === 1) {
-      setFile(files[0]);
+      const selectedFile = files[0];
+      if (selectedFile.size > 1024 * 1024) {
+        alert('업로드할 이미지는 1MB 미만이어야 합니다.');
+        e.target.value = '';
+        setFile(null);
+      } else {
+        setFile(selectedFile);
+      }
     }
   };
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const user = auth.currentUser;
-    if (!user || isLoading || post === '' || post.length < 100) return;
+    if (!user || isLoading || post === '' || post.length < 10) return;
     try {
       setIsLoading(true);
-      await addDoc(collection(db, 'posts'), {
+      const doc = await addDoc(collection(db, 'posts'), {
         post,
         createdAt: Date.now(),
         username: user.displayName || '익명',
         userId: user.uid,
       });
+      if (file) {
+        const locationRef = ref(storage, `posts/${user.uid}-${user.displayName}/${doc.id}`);
+        const result = await uploadBytes(locationRef, file);
+        const url = await getDownloadURL(result.ref);
+        updateDoc(doc, { photo: url });
+      }
+      setPost('');
+      setFile(null);
     } catch (error) {
       console.log(error);
     } finally {
