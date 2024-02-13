@@ -12,6 +12,7 @@ export const LightTheme = {
     btn4: 'forestgreen',
     warn: 'tomato',
     border: '#FFFFFF',
+    border2: '255, 255, 255',
     link: 'forestgreen',
     sub2: '#727272',
   },
