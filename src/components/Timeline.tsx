@@ -43,7 +43,7 @@ const Timeline = () => {
       unsubscribe = await onSnapshot(postsQuery, (snapshot) => {
         const posts = snapshot.docs.map((doc) => {
           const { createdAt, photo, post, userId, username } = doc.data();
-          return { createdAt, photo, post, userId, username, id: doc.id };
+          return { id: doc.id, createdAt, photo, post, userId, username };
         });
         setPosts(posts);
       });
@@ -72,4 +72,5 @@ const Wrapper = styled.div`
   display: flex;
   gap: 10px;
   flex-direction: column;
+  overflow-y: scroll;
 `;

@@ -4,6 +4,7 @@ export const LightTheme = {
     base: 'white',
     text: '#454545',
     text2: '#000000',
+    text3: '#FFFFFF',
     // focus: '#1d9bf0',
     focus: 'forestgreen',
     btn: '#3adf00',
