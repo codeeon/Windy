@@ -9,11 +9,7 @@ const Post = ({ photo, post, username }: Partial<IPost>) => {
         <Username>{username}</Username>
         <Payload>{post}</Payload>
       </Column>
-      {photo && (
-        <Column>
-          <Photo src={photo} alt='' />
-        </Column>
-      )}
+      <Column className='align-end'>{photo && <Photo src={photo} alt='' />}</Column>
     </Wrapper>
   );
 };
@@ -28,7 +24,13 @@ const Wrapper = styled.div`
   border-radius: 15px;
 `;
 
-const Column = styled.div``;
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  &.align-end {
+    align-items: flex-end;
+  }
+`;
 
 const Username = styled.span`
   font-weight: 600;
